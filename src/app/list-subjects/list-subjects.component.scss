@@ -1,0 +1,27 @@
+.subject-card {
+    max-width: 400px;
+}
+
+mat-card {
+    margin-bottom: 10px;
+    margin-right: 10px;
+    max-width: 300px;
+    float: left;
+
+    mat-divider {
+        margin: 10px 0;
+    }
+    img {
+        border-radius: 20px;
+        margin-left: 20px;
+    }
+    .exam-icon {
+        font-size: 1.4em;
+        position: relative;
+        top: 0.5em;
+    }
+}
+.subject-id {
+    font-size: 0.8em;
+    color: #ccc;
+}

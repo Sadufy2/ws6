@@ -1,0 +1,17 @@
+<nav>
+    <button mat-stroked-button routerLink="/list-teachers">
+        <mat-icon aria_hidden="false" aria-label="Home icon" fontIcon="home"></mat-icon>
+    </button>
+
+    <button mat-button [matMenuTriggerFor]="menu">Menu</button>
+    <mat-menu #menu="matMenu">
+        <button mat-menu-item routerLink="/list-teachers">List Teachers</button>
+        <button mat-menu-item routerLink="/list-subjects">List Subjects</button>
+    </mat-menu>
+
+    <button mat-stroked-button routerLink="/register">Register</button>
+    <button mat-flat-button color="accent" routerLink="/login">
+        <mat-icon aria-hidden="false" aria-label="" fontIcon="login"></mat-icon>
+        Login
+    </button>
+</nav>

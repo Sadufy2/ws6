@@ -1,0 +1,26 @@
+<h1>Subjects</h1>
+
+<mat-card class="subject-card" *ngFor="let subject of subjects">
+    <mat-card-header>
+        <mat-card-title>{{ subject.name }}</mat-card-title>
+        <mat-card-subtitle>{{ subject.neptun }}</mat-card-subtitle>
+        <img mat-card-sm-image [src]="subject.image">
+    </mat-card-header>
+    <mat-card-content>
+        <p>
+            Exam:
+            <mat-icon class="exam-icon" *ngIf="subject.exam" aria-label="" fontIcon="check_circle"></mat-icon>
+            <mat-icon class="exam-icon" *ngIf="!subject.exam" aria-label="" fontIcon="cancel"></mat-icon>
+        </p>
+        <p>Credit {{ subject.credit }}</p>
+        <p>Registered number of students: {{ subject.registeredStudents }}</p>
+        <mat-divider></mat-divider>
+        <p class="subject-id">{{ subject.id }}</p>
+        <mat-divider></mat-divider>
+        <button mat-stroked-button>
+            <mat-icon aria-hidden="false" aria-label="Edit icon" fontIcon="edit"></mat-icon>
+            Edit
+        </button>
+    </mat-card-content>
+</mat-card>
+  
