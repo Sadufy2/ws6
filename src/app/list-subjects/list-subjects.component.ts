@@ -11,15 +11,26 @@ export class ListSubjectsComponent implements OnInit {
   http: HttpClient
   subjects: Array<Subject>
 
+  defaultMin: number = 0
+  defaultMax: number = 0
+  /* sliderMin: number = 0
+  sliderMax: number = 0 */
+  selectedMin: number = 0
+  selectedMax: number = 0
+  rangeArray: Array<number> = []
+
   constructor(http: HttpClient) {
     this.http = http
     this.subjects = []
   }
 
   ngOnInit(): void {
-    //this.seedData()
-    this.http.get<Array<Subject>>('https://practiceapi.nikprog.hu/Subject')
+    this.getSubjects()
+  }
+  async getSubjects() {
+    await this.http.get<Array<Subject>>('https://practiceapi.nikprog.hu/Subject')
     .subscribe( resp => {
+      this.subjects = []
       resp.map(x => {
         let s = new Subject()
         s.id = x.id
@@ -32,32 +43,36 @@ export class ListSubjectsComponent implements OnInit {
         s.registeredStudents = x.registeredStudents
         this.subjects.push(s)
       })
+      this.defaultMin = this.findMinCredit()
+      this.defaultMax = this.findMaxCredit()
+      this.setRangeArray()
     })
-    console.log(this.subjects)
   }
 
-  seedData() {
-    let s1 = new Subject()
-    s1.id = "gsgdmpngloisbfbs"
-    s1.name = "kliensoldali"
-    s1.neptun = "ubgsod"
-    s1.credit = 6
-    s1.exam = true
-    s1.image = "https://wl-brightside.cf.tsp.li/resize/728x/jpg/c65/0b2/c7b9cb5f8fa4f3ab765ba257a8.jpg"
-    s1.creatorName = "vala ki"
-    s1.registeredStudents = 43
+  setRangeArray() {    
+    for (let i = this.defaultMin; i < this.defaultMax + 1; i++) {
+      this.rangeArray.push(i);
+    }
+  }
+  setFilter() {
+    
+    console.log(this.subjects.filter(x => ( this.selectedMin <= x.credit && x.credit <= this.selectedMax)))
+    this.subjects = this.subjects.filter(x => ( this.selectedMin <= x.credit && x.credit <= this.selectedMax));
+  }
 
-    let s2 = new Subject()
-    s2.id = "kjhgafs24qad3"
-    s2.name = "szerveroldali"
-    s2.neptun = "hsd325"
-    s2.credit = 3
-    s2.exam = false
-    s2.image = "https://imgix.ranker.com/user_node_img/50024/1000479726/original/despite-all-my-rage-i-am-still-just-a-bunny-out-of-my-cage-photo-u1?auto=format&q=60&fit=crop&fm=pjpg&dpr=2&w=375"
-    s2.creatorName = "vala ki"
-    s2.registeredStudents = 43
-
-    this.subjects.push(s1)
-    this.subjects.push(s2)
+  findMinCredit(): number {
+    const minCredit = this.subjects.reduce((min, current) => {
+      return current.credit < min.credit ? current : min;
+    });
+    return minCredit.credit;
+  }
+  findMaxCredit(): number {
+    const maxCredit = this.subjects.reduce((max, current) => {
+      return current.credit > max.credit ? current : max;
+    });
+    return maxCredit.credit;
+  }
+  clickID(id: string) {
+    alert(id)
   }
 }

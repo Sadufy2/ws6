@@ -1,1 +1,65 @@
-<p>list-teachers works!</p>
+<h1>Teachers</h1>
+<div class="main-container">
+    <div class="edit-box" [hidden]="!isInEdit">
+        <h1>Update Teacher</h1>
+        <mat-form-field appearance="outline">
+            <mat-label>Name</mat-label>
+            <input matInput [(ngModel)]="this.teacher.name">
+            <!-- <mat-icon matSuffix>lock</mat-icon> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Neptun ID</mat-label>
+            <input matInput [(ngModel)]="this.teacher.neptun">
+            <!-- <mat-icon matSuffix>lock</mat-icon> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Birth Year</mat-label>
+            <input matInput [(ngModel)]="this.teacher.birthYear">
+            <!-- <mat-icon matSuffix>lock</mat-icon> -->
+        </mat-form-field>
+        <mat-form-field appearance="outline">
+            <mat-label>Image URL</mat-label>
+            <input matInput [(ngModel)]="this.teacher.image">
+            <!-- <mat-icon matSuffix>lock</mat-icon> -->
+        </mat-form-field>
+    
+        <button
+            mat-flat-button
+            color="accent"
+            (click)="updateTeacher()">
+            Save
+        </button>
+
+        <button mat-stroked-button 
+            class="edit-button" 
+            (click)="closeEditMode()">
+            Close
+        </button>
+    </div>
+    
+    <mat-card class="entity-card" *ngFor="let teacher of teachers">
+        <mat-card-header>
+            <mat-card-title>{{ teacher.name }}</mat-card-title>
+            <mat-card-subtitle>{{ teacher.neptun }}</mat-card-subtitle>
+            <img mat-card-sm-image [src]="teacher.image">
+        </mat-card-header>
+        <mat-card-content>
+            <mat-divider></mat-divider>
+            <p>Teached Subjects</p>
+            <div *ngIf="teacher.teachedSubjects.length > 0; else noElementToDisplay">
+                <button mat-stroked-button
+                    *ngFor="let subject of teacher.teachedSubjects">
+                    {{ subject.name }} - {{ subject.neptun }} - {{ subject.credit }}
+                </button>
+            </div>
+            <ng-template #noElementToDisplay>No Subjects</ng-template>
+            <mat-divider></mat-divider>
+            <p>{{ teacher.id }}</p>
+            <!-- [routerLink]="['/update-teacher/', teacher.id]" -->
+            <button mat-stroked-button class="edit-button" (click)="openEdit(teacher.id)">
+                <mat-icon aria-hidden="false" aria-label="Edit icon" fontIcon="edit"></mat-icon>
+                Edit
+            </button>
+        </mat-card-content>
+    </mat-card>
+</div>

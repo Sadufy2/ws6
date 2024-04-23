@@ -1,1 +1,30 @@
-<p>create-teacher works!</p>
+<div class="main-container">
+    <h1>Create Teacher</h1>
+    <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+        <input matInput [(ngModel)]="this.teacher.name">
+        <!-- <mat-icon matSuffix>lock</mat-icon> -->
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Neptun ID</mat-label>
+        <input matInput [(ngModel)]="this.teacher.neptun">
+        <!-- <mat-icon matSuffix>lock</mat-icon> -->
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Birth Year</mat-label>
+        <input matInput [(ngModel)]="this.teacher.birthYear">
+        <!-- <mat-icon matSuffix>lock</mat-icon> -->
+    </mat-form-field>
+    <mat-form-field appearance="outline">
+        <mat-label>Image URL</mat-label>
+        <input matInput [(ngModel)]="this.teacher.image">
+        <!-- <mat-icon matSuffix>lock</mat-icon> -->
+    </mat-form-field>
+
+    <button
+        mat-flat-button
+        color="accent"
+        (click)="createTeacher()">
+        Update
+    </button>
+</div>

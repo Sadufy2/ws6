@@ -1,8 +1,18 @@
-.subject-card {
-    max-width: 400px;
+.main-container {
+    width: 900px;
+    margin: auto;
 }
-
-mat-card {
+.filter-box {
+    margin: 40px;
+    padding: 40px;
+    border-radius: 20px;
+    background-color: yellow;
+}
+mat-form-field{
+    margin-right: 20px;
+}
+.entity-card {
+    padding: 10px;
     margin-bottom: 10px;
     margin-right: 10px;
     max-width: 300px;
